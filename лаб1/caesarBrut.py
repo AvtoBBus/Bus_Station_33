@@ -74,6 +74,10 @@ def showWork(text4encrypt: str, key: int):
     with open(PATH + "decrypted.txt", 'w', encoding='utf-8') as file:
         file.write(decrypt(enc, key))
 
+    brutResults = sorted(bruteForce(enc), key=itemgetter('key'))
+
     print("Результаты перебора\n" + "=" * 25)
-    for br in sorted(bruteForce(enc), key=itemgetter('key')):
+    for br in brutResults:
         print(f"Ключ: {br['key']} \nРасшифрованный текст: {br['text'][:101]}\n\n" + "=" * 25)
+    
+    return brutResults
